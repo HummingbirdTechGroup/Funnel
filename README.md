@@ -2,9 +2,9 @@
 
 Little testing repositories enhancer.
 
-[![License](https://poser.pugx.org/carlosv2/can/license)](https://packagist.org/packages/carlosv2/can)
-[![Build Status](https://travis-ci.org/carlosV2/Can.svg?branch=master)](https://travis-ci.org/carlosV2/Can)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/bc563f45-525d-4862-adaf-149bc06578b3/mini.png)](https://insight.sensiolabs.com/projects/bc563f45-525d-4862-adaf-149bc06578b3)
+[![License](https://poser.pugx.org/carlosv2/funnel/license)](https://packagist.org/packages/carlosv2/funnel)
+[![Build Status](https://travis-ci.org/carlosV2/Funnel.svg?branch=master)](https://travis-ci.org/carlosV2/Funnel)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/99bf9a7b-9620-4b42-91e5-d943fed7862c/mini.png)](https://insight.sensiolabs.com/projects/99bf9a7b-9620-4b42-91e5-d943fed7862c)
 
 This project aims to provide quick and easy filtering capabilities to [everzet/persisted-objects](https://github.com/everzet/persisted-objects).
 
