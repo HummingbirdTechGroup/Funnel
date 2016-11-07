@@ -1,0 +1,41 @@
+{
+    "name": "carlosv2/funnel",
+    "type": "library",
+    "description": "Little testing repositories enhancer",
+    "keywords": [
+        "Repository",
+        "Filesystem",
+        "Test",
+        "PersistedObjects"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Carlos Ortega",
+            "email": "carlosV2.0@gmail.com"
+        }
+    ],
+    "autoload": {
+        "files": ["src/bootstrap.php"],
+        "psr-4": {
+            "carlosV2\\Funnel\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "test\\carlosV2\\Funnel\\": "tests"
+        }
+    },
+    "require": {
+        "php": ">=5.5",
+        "everzet/persisted-objects": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
