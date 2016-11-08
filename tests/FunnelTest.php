@@ -179,4 +179,18 @@ class FunnelTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($object3, $this->funnel->findOneByNotTesting('publicA'));
         $this->assertSame(1, $this->funnel->countByNotTesting('publicA'));
     }
+
+    /** @test @expectedException \RuntimeException */
+    public function itThrowsExceptionIfTheFunctionIsNotFound()
+    {
+        Funnel::addFilter(new TestingFilter());
+
+        $this->funnel->searchByTesting();
+    }
+
+    /** @test @expectedException \RuntimeException */
+    public function itThrowsExceptionIfTheFilterIsNotFound()
+    {
+        $this->funnel->findByUnexisting();
+    }
 }

@@ -110,36 +110,41 @@ final class Funnel implements Repository
      */
     public function __call($name, array $arguments)
     {
-        if (($matches = self::getMatches('/(find(?:One)?|count)By(Not)?(.*)/i', $name)) === false) {
+        if (($matches = self::getMatches('/((?:find(?:One)?|count)By)(Not)?(.+)/i', $name)) === false) {
             throw new \RuntimeException(sprintf('Unable to compose filter for `%s`', $name));
         }
 
         $filter = strtolower($matches[3]);
-        if (!array_key_exists($filter, self::$filters)) {
-            throw new \RuntimeException(sprintf('Filter `%s` not found.', $filter));
-        }
+        self::assertFilterExists($filter);
 
-        $callable = call_user_func_array(self::$filters[strtolower($matches[3])], $arguments);
-        if ($matches[2] !== '') {
-            $callable = function ($object) use ($callable) {
-                return !$callable($object);
-            };
-        }
+        $callable = call_user_func_array(self::$filters[$filter], $arguments);
+        $callable = ($matches[2] !== '' ? self::negate($callable) : $callable);
 
-        return call_user_func([$this, sprintf('%sBy', $matches[1])], $callable);
+        return call_user_func([$this, $matches[1]], $callable);
     }
 
     /**
-     * @param Filter $filter
+     * @param string $filter
+     *
+     * @throws \RuntimeException
      */
-    public static function addFilter(Filter $filter)
+    private static function assertFilterExists($filter)
     {
-        $rftClass = new \ReflectionClass($filter);
-        if (($matches = self::getMatches('/(.+)Filter/', $rftClass->getShortName())) === false) {
-            throw new \RuntimeException(sprintf('Filter `%s` does not match the format "<Name>Filter".', $rftClass->getShortName()));
+        if (!array_key_exists($filter, self::$filters)) {
+            throw new \RuntimeException(sprintf('Filter `%s` not found.', $filter));
         }
+    }
 
-        self::$filters[strtolower($matches[1])] = $filter->getFilter();
+    /**
+     * @param callable $callback
+     *
+     * @return \Closure
+     */
+    private static function negate(callable $callback)
+    {
+        return function ($object) use ($callback) {
+            return !$callback($object);
+        };
     }
 
     /**
@@ -156,5 +161,18 @@ final class Funnel implements Repository
         }
 
         return $matches;
+    }
+
+    /**
+     * @param Filter $filter
+     */
+    public static function addFilter(Filter $filter)
+    {
+        $rftClass = new \ReflectionClass($filter);
+        if (($matches = self::getMatches('/(.+)Filter/', $rftClass->getShortName())) === false) {
+            throw new \RuntimeException(sprintf('Filter `%s` does not match the format "<Name>Filter".', $rftClass->getShortName()));
+        }
+
+        self::$filters[strtolower($matches[1])] = $filter->getFilter();
     }
 }
