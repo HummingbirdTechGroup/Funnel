@@ -2,7 +2,7 @@
 
 namespace carlosV2\Funnel;
 
-interface Filter
+interface FilterInterface
 {
     /**
      * @return \Closure

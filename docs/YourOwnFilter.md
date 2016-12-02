@@ -2,7 +2,7 @@
 
 Funnel filters are a bit tricky to create.
 
-They must implement `carlosV2\Funnel\Filter` and the `getFilter` method.
+They must implement `carlosV2\Funnel\FilterInterface` and the `getFilter` method.
 
 This method needs to return a callback function defining the needed parameters which,
 at the same time, it also needs to return a nested callback accepting the object as
@@ -11,9 +11,9 @@ the single parameter.
 For instance, here is an example for a date range filter:
 
 ```php
-use carlosV2\Funnel\Filter;
+use carlosV2\Funnel\FilterInterface;
 
-final class DateRangeFilter implements Filter
+final class DateRangeFilter implements FilterInterface
 {
     /**
      * @inheritDoc

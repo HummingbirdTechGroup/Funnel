@@ -2,7 +2,7 @@
 
 namespace test\carlosV2\Funnel\Filter;
 
-use carlosV2\Funnel\Filter;
+use carlosV2\Funnel\FilterInterface;
 use test\carlosV2\Funnel\TestObject;
 
 abstract class FilterTestCase extends \PHPUnit_Framework_TestCase
@@ -15,7 +15,7 @@ abstract class FilterTestCase extends \PHPUnit_Framework_TestCase
     /** @test */
     public function itIsAFilter()
     {
-        $this->assertInstanceOf(Filter::class, $this->filter);
+        $this->assertInstanceOf(FilterInterface::class, $this->filter);
     }
 
     /**

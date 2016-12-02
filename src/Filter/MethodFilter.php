@@ -2,9 +2,9 @@
 
 namespace carlosV2\Funnel\Filter;
 
-use carlosV2\Funnel\Filter;
+use carlosV2\Funnel\FilterInterface;
 
-final class MethodFilter implements Filter
+final class MethodFilter implements FilterInterface
 {
     /**
      * @var \Closure

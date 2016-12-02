@@ -164,9 +164,9 @@ final class Funnel implements Repository
     }
 
     /**
-     * @param Filter $filter
+     * @param FilterInterface $filter
      */
-    public static function addFilter(Filter $filter)
+    public static function addFilter(FilterInterface $filter)
     {
         $rftClass = new \ReflectionClass($filter);
         if (($matches = self::getMatches('/(.+)Filter/', $rftClass->getShortName())) === false) {

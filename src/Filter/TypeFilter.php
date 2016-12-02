@@ -2,9 +2,9 @@
 
 namespace carlosV2\Funnel\Filter;
 
-use carlosV2\Funnel\Filter;
+use carlosV2\Funnel\FilterInterface;
 
-final class TypeFilter implements Filter
+final class TypeFilter implements FilterInterface
 {
     /**
      * @inheritDoc

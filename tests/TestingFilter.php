@@ -2,9 +2,9 @@
 
 namespace test\carlosV2\Funnel;
 
-use carlosV2\Funnel\Filter;
+use carlosV2\Funnel\FilterInterface;
 
-class TestingFilter implements Filter
+class TestingFilter implements FilterInterface
 {
     /**
      * @inheritDoc
