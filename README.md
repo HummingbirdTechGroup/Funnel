@@ -80,6 +80,15 @@ to Funnel to make them available when composing new methods.
 
 Feel free to create a pull request with your own generic filters! :)
 
+Alternatively, you can decorate an array in order to provide the Funnel API on top of it. For example:
+
+```php
+$myArray = [$obj1, $obj2, $obj3];
+
+// Any Funnel-compatible method can be used here
+Funnel($myArray)->countByType(\DateTime::class);
+```
+
 ## Install
 
 Open a command console, enter your project directory and execute the
