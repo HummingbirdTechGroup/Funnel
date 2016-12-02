@@ -27,4 +27,12 @@ final class MethodFilter implements FilterInterface
             return $callable([$method => $value]);
         };
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getName()
+    {
+        return 'method';
+    }
 }

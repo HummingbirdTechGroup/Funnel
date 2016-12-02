@@ -40,4 +40,12 @@ final class PropertiesFilter implements FilterInterface
         $rflProperty->setAccessible(true);
         return $rflProperty->getValue($object);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getName()
+    {
+        return 'properties';
+    }
 }

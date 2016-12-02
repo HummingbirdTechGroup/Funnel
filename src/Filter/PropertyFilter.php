@@ -27,4 +27,12 @@ final class PropertyFilter implements FilterInterface
             return $callable([$property => $value]);
         };
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getName()
+    {
+        return 'property';
+    }
 }

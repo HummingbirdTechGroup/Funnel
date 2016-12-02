@@ -17,4 +17,12 @@ final class TypeFilter implements FilterInterface
             };
         };
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getName()
+    {
+        return 'type';
+    }
 }

@@ -27,4 +27,12 @@ final class MethodsFilter implements FilterInterface
             };
         };
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getName()
+    {
+        return 'methods';
+    }
 }

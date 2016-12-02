@@ -23,4 +23,12 @@ final class HavingFilter implements FilterInterface
             };
         };
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getName()
+    {
+        return 'having';
+    }
 }

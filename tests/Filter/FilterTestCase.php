@@ -8,7 +8,7 @@ use test\carlosV2\Funnel\TestObject;
 abstract class FilterTestCase extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Filter
+     * @var FilterInterface
      */
     protected $filter;
 
@@ -16,6 +16,13 @@ abstract class FilterTestCase extends \PHPUnit_Framework_TestCase
     public function itIsAFilter()
     {
         $this->assertInstanceOf(FilterInterface::class, $this->filter);
+    }
+
+    /** @test */
+    public function itReturnsTheFilterName()
+    {
+        $this->assertTrue(is_string($this->filter->getName()));
+        $this->assertNotEmpty($this->filter->getName());
     }
 
     /**

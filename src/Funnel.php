@@ -168,11 +168,8 @@ final class Funnel implements Repository
      */
     public static function addFilter(FilterInterface $filter)
     {
-        $rftClass = new \ReflectionClass($filter);
-        if (($matches = self::getMatches('/(.+)Filter/', $rftClass->getShortName())) === false) {
-            throw new \RuntimeException(sprintf('Filter `%s` does not match the format "<Name>Filter".', $rftClass->getShortName()));
-        }
+        $name = strtolower($filter->getName());
 
-        self::$filters[strtolower($matches[1])] = $filter->getFilter();
+        self::$filters[$name] = $filter->getFilter();
     }
 }

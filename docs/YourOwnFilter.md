@@ -2,9 +2,12 @@
 
 Funnel filters are a bit tricky to create.
 
-They must implement `carlosV2\Funnel\FilterInterface` and the `getFilter` method.
+They must implement `carlosV2\Funnel\FilterInterface` which require the following methods:
 
-This method needs to return a callback function defining the needed parameters which,
+- getName
+- getFilter
+
+The `getFilter` method needs to return a callback function defining the needed parameters which,
 at the same time, it also needs to return a nested callback accepting the object as
 the single parameter.
 
@@ -15,6 +18,14 @@ use carlosV2\Funnel\FilterInterface;
 
 final class DateRangeFilter implements FilterInterface
 {
+    /**
+     * @inheritDoc
+     */
+    public function getName()
+    {
+        return 'dateRange';
+    }
+
     /**
      * @inheritDoc
      */
@@ -31,8 +42,7 @@ final class DateRangeFilter implements FilterInterface
 }
 ```
 
-Bear in mind that the class name must end with `Filter` and the beginning will be
-used for composing the new methods.
+Bear in mind that the returned name will be used for composing the new methods.
 
 For example:
 - findByDateRange('getMethod', new \DateTime('07/11/2016'), new \DateTime('08/11/2016'))

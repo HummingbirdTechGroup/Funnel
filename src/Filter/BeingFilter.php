@@ -23,4 +23,12 @@ final class BeingFilter implements FilterInterface
             };
         };
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getName()
+    {
+        return 'being';
+    }
 }

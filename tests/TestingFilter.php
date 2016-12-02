@@ -17,4 +17,12 @@ class TestingFilter implements FilterInterface
             };
         };
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getName()
+    {
+        return 'testing';
+    }
 }
