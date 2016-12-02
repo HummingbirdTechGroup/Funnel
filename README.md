@@ -86,7 +86,7 @@ Open a command console, enter your project directory and execute the
 following command to download the latest stable version of this project:
 
 ```bash
-$ composer require --dev carlosv2/funnel
+$ composer require carlosv2/funnel
 ```
 
 This command requires you to have Composer installed globally, as explained
