@@ -53,6 +53,8 @@ $objects = $funnel->findBy(function ($object) {
 
 In addition, Funnel provides some generic filters that can be used to speed up development:
 
+- [AllOfFilter](https://github.com/carlosV2/Funnel/blob/master/docs/AllOfFilter.md)
+- [AnyOfFilter](https://github.com/carlosV2/Funnel/blob/master/docs/AnyOfFilter.md)
 - [MethodFilter](https://github.com/carlosV2/Funnel/blob/master/docs/MethodFilter.md)
 - [MethodsFilter](https://github.com/carlosV2/Funnel/blob/master/docs/MethodsFilter.md)
 - [PropertyFilter](https://github.com/carlosV2/Funnel/blob/master/docs/PropertyFilter.md)
