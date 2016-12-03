@@ -172,4 +172,22 @@ final class Funnel implements Repository
 
         self::$filters[$name] = $filter->getFilter();
     }
+
+    /**
+     * @param string $name
+     * @param array  $arguments
+     *
+     * @return callable
+     */
+    public static function __callStatic($name, array $arguments)
+    {
+        if (($matches = self::getMatches('/(.+)Filter/i', $name)) === false) {
+            throw new \RuntimeException(sprintf('Unable to find filter `%s`', $name));
+        }
+
+        $filter = strtolower($matches[1]);
+        self::assertFilterExists($filter);
+
+        return self::$filters[$filter];
+    }
 }

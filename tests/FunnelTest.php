@@ -193,4 +193,13 @@ class FunnelTest extends \PHPUnit_Framework_TestCase
     {
         $this->funnel->findByUnexisting();
     }
+
+    /** @test */
+    public function itReturnsTheTestingFilter()
+    {
+        $filter = new TestingFilter();
+        Funnel::addFilter($filter);
+
+        $this->assertEquals($filter->getFilter(), Funnel::testingFilter());
+    }
 }
