@@ -3,6 +3,7 @@
 namespace carlosV2\Funnel\Filter;
 
 use carlosV2\Funnel\FilterInterface;
+use ReflectionException;
 
 final class PropertiesFilter implements FilterInterface
 {
@@ -18,7 +19,7 @@ final class PropertiesFilter implements FilterInterface
                         throw new \RuntimeException(sprintf('Property `%s` not found on class `%s`.', $property, get_class($object)));
                     }
 
-                    if ($this->getPropertyValue($object, $property) !== $value) {
+                    if ($this->getPropertyValue(get_class($object), $object, $property) !== $value) {
                         return false;
                     }
                 }
@@ -29,16 +30,27 @@ final class PropertiesFilter implements FilterInterface
     }
 
     /**
+     * @param string $className
      * @param object $object
      * @param string $property
      *
      * @return mixed
+     *
+     * @throws ReflectionException
      */
-    private function getPropertyValue($object, $property)
+    private function getPropertyValue($className, $object, $property)
     {
-        $rflProperty = new \ReflectionProperty($object, $property);
-        $rflProperty->setAccessible(true);
-        return $rflProperty->getValue($object);
+        try {
+            $rflProperty = new \ReflectionProperty($className, $property);
+            $rflProperty->setAccessible(true);
+            return $rflProperty->getValue($object);
+        } catch (ReflectionException $e) {
+            if (($parentClassName = get_parent_class($className)) !== false) {
+                return $this->getPropertyValue($parentClassName, $object, $property);
+            }
+
+            throw $e;
+        }
     }
 
     /**
