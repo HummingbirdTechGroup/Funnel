@@ -200,6 +200,7 @@ class FunnelTest extends \PHPUnit_Framework_TestCase
         $filter = new TestingFilter();
         Funnel::addFilter($filter);
 
-        $this->assertEquals($filter->getFilter(), Funnel::testingFilter());
+        $callable = $filter->getFilter();
+        $this->assertEquals($callable('test'), Funnel::testingFilter('test'));
     }
 }

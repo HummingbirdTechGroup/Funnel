@@ -188,6 +188,6 @@ final class Funnel implements Repository
         $filter = strtolower($matches[1]);
         self::assertFilterExists($filter);
 
-        return self::$filters[$filter];
+        return call_user_func_array(self::$filters[$filter], $arguments);
     }
 }
