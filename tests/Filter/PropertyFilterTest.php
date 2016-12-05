@@ -17,6 +17,7 @@ class PropertyFilterTest extends FilterTestCase
         $this->assertTrue($this->executeFilter('publicProperty', 'public'));
         $this->assertTrue($this->executeFilter('protectedProperty', 'protected'));
         $this->assertTrue($this->executeFilter('privateProperty', 'private'));
+        $this->assertTrue($this->executeFilter('dynamicProperty', 'dynamic'));
     }
 
     /** @test */

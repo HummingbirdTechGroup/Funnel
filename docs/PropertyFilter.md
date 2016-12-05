@@ -14,4 +14,5 @@ class MyObject
 $objects = $funnel->findByProperty('value', 5);
 ```
 
-Note: It works for any property type being `public`, `protected` and `private`.
+Note: It works for any property type being `public`, `protected`, `private`
+as well as those allocated dynamically.

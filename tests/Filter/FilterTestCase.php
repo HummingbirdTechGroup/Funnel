@@ -30,7 +30,10 @@ abstract class FilterTestCase extends \PHPUnit_Framework_TestCase
      */
     protected function executeFilter()
     {
+        $object = new TestObject('public', 'protected', 'private');
+        $object->dynamicProperty = 'dynamic';
+
         $callable = call_user_func_array($this->filter->getFilter(), func_get_args());
-        return $callable(new TestObject('public', 'protected', 'private'));
+        return $callable($object);
     }
 }

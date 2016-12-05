@@ -16,7 +16,8 @@ class PropertiesFilterTest extends FilterTestCase
     {
         $this->assertTrue($this->executeFilter([
             'publicProperty' => 'public',
-            'privateProperty' => 'private'
+            'privateProperty' => 'private',
+            'dynamicProperty' => 'dynamic'
         ]));
     }
 

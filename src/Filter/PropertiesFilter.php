@@ -35,8 +35,6 @@ final class PropertiesFilter implements FilterInterface
      * @param string $property
      *
      * @return mixed
-     *
-     * @throws ReflectionException
      */
     private function getPropertyValue($className, $object, $property)
     {
@@ -49,7 +47,9 @@ final class PropertiesFilter implements FilterInterface
                 return $this->getPropertyValue($parentClassName, $object, $property);
             }
 
-            throw $e;
+            // If no defined property is found, try to find a dynamic one
+            // If no dynamic one is found, let it fail
+            return $object->{$property};
         }
     }
 
