@@ -3,7 +3,6 @@
 namespace test\carlosV2\Funnel\Filter;
 
 use carlosV2\Funnel\Filter\TypeFilter;
-use test\carlosV2\Funnel\TestObject;
 
 class TypeFilterTest extends FilterTestCase 
 {
@@ -15,12 +14,12 @@ class TypeFilterTest extends FilterTestCase
     /** @test */
     public function itAcceptsObjectsIfTheyHaveTheExpectedType()
     {
-        $this->assertTrue($this->executeFilter(TestObject::class));
+        $this->assertTrue($this->executeFilter('test\carlosV2\Funnel\TestObject'));
     }
 
     /** @test */
     public function itRejectsObjectsIfThePropertyDoesNotReturnTheExpectedValue()
     {
-        $this->assertFalse($this->executeFilter(\DateTime::class));
+        $this->assertFalse($this->executeFilter('DateTime'));
     }
 }

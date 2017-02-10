@@ -19,7 +19,15 @@ final class PropertiesFilter implements FilterInterface
                         throw new \RuntimeException(sprintf('Property `%s` not found on class `%s`.', $property, get_class($object)));
                     }
 
-                    if ($this->getPropertyValue($object, $property) !== $value) {
+                    try {
+                        $objectValue = From($object)->extract($property);
+                    } catch (ReflectionException $e) {
+                        // If no defined property is found, try to find a dynamic one
+                        // If no dynamic one is found, let it fail
+                        $objectValue = $object->{$property};
+                    }
+
+                    if ($objectValue !== $value) {
                         return false;
                     }
                 }
@@ -27,23 +35,6 @@ final class PropertiesFilter implements FilterInterface
                 return true;
             };
         };
-    }
-
-    /**
-     * @param object $object
-     * @param string $property
-     *
-     * @return mixed
-     */
-    private function getPropertyValue($object, $property)
-    {
-        try {
-            return From($object)->extract($property);
-        } catch (ReflectionException $e) {
-            // If no defined property is found, try to find a dynamic one
-            // If no dynamic one is found, let it fail
-            return $object->{$property};
-        }
     }
 
     /**

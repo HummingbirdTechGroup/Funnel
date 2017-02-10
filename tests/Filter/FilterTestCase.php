@@ -15,7 +15,7 @@ abstract class FilterTestCase extends \PHPUnit_Framework_TestCase
     /** @test */
     public function itIsAFilter()
     {
-        $this->assertInstanceOf(FilterInterface::class, $this->filter);
+        $this->assertInstanceOf('carlosV2\Funnel\FilterInterface', $this->filter);
     }
 
     /** @test */

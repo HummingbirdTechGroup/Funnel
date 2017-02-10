@@ -20,7 +20,7 @@ class FunnelTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->repository = $this->prophesize(Repository::class);
+        $this->repository = $this->prophesize('Everzet\PersistedObjects\Repository');
 
         $this->funnel = new Funnel($this->repository->reveal());
     }
@@ -28,7 +28,7 @@ class FunnelTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function itIsARepository()
     {
-        $this->assertInstanceOf(Repository::class, $this->funnel);
+        $this->assertInstanceOf('Everzet\PersistedObjects\Repository', $this->funnel);
     }
 
     /** @test */
@@ -67,9 +67,9 @@ class FunnelTest extends \PHPUnit_Framework_TestCase
         $object1 = new TestObject('public', 'protected', 'private');
         $object2 = new TestObject('public', 'protected', 'private');
 
-        $this->repository->getAll()->willReturn([$object1, $object2]);
+        $this->repository->getAll()->willReturn(array($object1, $object2));
 
-        $this->assertSame([$object1, $object2], $this->funnel->getAll());
+        $this->assertSame(array($object1, $object2), $this->funnel->getAll());
     }
 
     /** @test */
@@ -87,9 +87,9 @@ class FunnelTest extends \PHPUnit_Framework_TestCase
         $object2 = new TestObject('publicA', 'protectedB', 'privateA');
         $object3 = new TestObject('publicB', 'protectedA', 'privateA');
 
-        $this->repository->getAll()->willReturn([$object1, $object2, $object3]);
+        $this->repository->getAll()->willReturn(array($object1, $object2, $object3));
 
-        $this->assertSame([$object1, $object2, $object3], $this->funnel->findAll());
+        $this->assertSame(array($object1, $object2, $object3), $this->funnel->findAll());
     }
 
     /** @test */
@@ -99,9 +99,9 @@ class FunnelTest extends \PHPUnit_Framework_TestCase
         $object2 = new TestObject('publicA', 'protectedB', 'privateA');
         $object3 = new TestObject('publicB', 'protectedA', 'privateA');
 
-        $this->repository->getAll()->willReturn([$object1, $object2, $object3]);
+        $this->repository->getAll()->willReturn(array($object1, $object2, $object3));
 
-        $this->assertSame([$object1, $object3], $this->funnel->findBy(function (TestObject $object) {
+        $this->assertSame(array($object1, $object3), $this->funnel->findBy(function (TestObject $object) {
             return $object->publicProperty === 'publicB' || $object->getPrivateProperty() === 'privateB';
         }));
     }
@@ -113,7 +113,7 @@ class FunnelTest extends \PHPUnit_Framework_TestCase
         $object2 = new TestObject('publicA', 'protectedB', 'privateA');
         $object3 = new TestObject('publicB', 'protectedA', 'privateA');
 
-        $this->repository->getAll()->willReturn([$object1, $object2, $object3]);
+        $this->repository->getAll()->willReturn(array($object1, $object2, $object3));
 
         $this->assertSame(2, $this->funnel->countBy(function (TestObject $object) {
             return $object->publicProperty === 'publicB' || $object->getPrivateProperty() === 'privateB';
@@ -127,7 +127,7 @@ class FunnelTest extends \PHPUnit_Framework_TestCase
         $object2 = new TestObject('publicA', 'protectedB', 'privateA');
         $object3 = new TestObject('publicB', 'protectedA', 'privateA');
 
-        $this->repository->getAll()->willReturn([$object1, $object2, $object3]);
+        $this->repository->getAll()->willReturn(array($object1, $object2, $object3));
 
         $this->assertSame($object1, $this->funnel->findOneBy(function (TestObject $object) {
             return $object->publicProperty === 'publicB' || $object->getPrivateProperty() === 'privateB';
@@ -141,7 +141,7 @@ class FunnelTest extends \PHPUnit_Framework_TestCase
         $object2 = new TestObject('publicA', 'protectedB', 'privateA');
         $object3 = new TestObject('publicB', 'protectedA', 'privateA');
 
-        $this->repository->getAll()->willReturn([$object1, $object2, $object3]);
+        $this->repository->getAll()->willReturn(array($object1, $object2, $object3));
 
         $this->assertNull($this->funnel->findOneBy(function (TestObject $object) {
             return $object->publicProperty === 'publicC';
@@ -157,9 +157,9 @@ class FunnelTest extends \PHPUnit_Framework_TestCase
         $object2 = new TestObject('publicA', 'protectedB', 'privateA');
         $object3 = new TestObject('publicB', 'protectedA', 'privateA');
 
-        $this->repository->getAll()->willReturn([$object1, $object2, $object3]);
+        $this->repository->getAll()->willReturn(array($object1, $object2, $object3));
 
-        $this->assertSame([$object1, $object2], $this->funnel->findByTesting('publicA'));
+        $this->assertSame(array($object1, $object2), $this->funnel->findByTesting('publicA'));
         $this->assertSame($object1, $this->funnel->findOneByTesting('publicA'));
         $this->assertSame(2, $this->funnel->countByTesting('publicA'));
     }
@@ -173,9 +173,9 @@ class FunnelTest extends \PHPUnit_Framework_TestCase
         $object2 = new TestObject('publicA', 'protectedB', 'privateA');
         $object3 = new TestObject('publicB', 'protectedA', 'privateA');
 
-        $this->repository->getAll()->willReturn([$object1, $object2, $object3]);
+        $this->repository->getAll()->willReturn(array($object1, $object2, $object3));
 
-        $this->assertSame([$object3], $this->funnel->findByNotTesting('publicA'));
+        $this->assertSame(array($object3), $this->funnel->findByNotTesting('publicA'));
         $this->assertSame($object3, $this->funnel->findOneByNotTesting('publicA'));
         $this->assertSame(1, $this->funnel->countByNotTesting('publicA'));
     }

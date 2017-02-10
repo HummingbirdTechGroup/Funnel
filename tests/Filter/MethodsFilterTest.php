@@ -14,27 +14,27 @@ class MethodsFilterTest extends FilterTestCase
     /** @test */
     public function itAcceptsObjectsIfTheMethodsReturnTheExpectedValues()
     {
-        $this->assertTrue($this->executeFilter([
+        $this->assertTrue($this->executeFilter(array(
             'getPublicProperty' => 'public',
             'getPrivateProperty' => 'private'
-        ]));
+        )));
     }
 
     /** @test */
     public function itRejectsObjectsIfTheMethodsDoNotReturnTheExpectedValues()
     {
-        $this->assertFalse($this->executeFilter([
+        $this->assertFalse($this->executeFilter(array(
             'getPublicProperty' => 'public',
             'getPrivateProperty' => 'protected'
-        ]));
+        )));
     }
 
     /** @test @expectedException \RunTimeException */
     public function itThrowsAnExceptionIfAMethodDoesNotExists()
     {
-        $this->executeFilter([
+        $this->executeFilter(array(
             'getPublicProperty' => 'public',
             'getUnknownProperty' => 'unknown'
-        ]);
+        ));
     }
 }

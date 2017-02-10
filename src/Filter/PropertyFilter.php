@@ -13,7 +13,9 @@ final class PropertyFilter implements FilterInterface
 
     public function __construct()
     {
-        $this->propertiesFilter = (new PropertiesFilter())->getFilter();
+        $filter = new PropertiesFilter();
+
+        $this->propertiesFilter = $filter->getFilter();
     }
 
     /**
@@ -24,7 +26,7 @@ final class PropertyFilter implements FilterInterface
         $callable = $this->propertiesFilter;
 
         return function ($property, $value) use ($callable) {
-            return $callable([$property => $value]);
+            return $callable(array($property => $value));
         };
     }
 

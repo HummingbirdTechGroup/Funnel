@@ -14,28 +14,28 @@ class PropertiesFilterTest extends FilterTestCase
     /** @test */
     public function itAcceptsObjectsIfThePropertiesReturnTheExpectedValues()
     {
-        $this->assertTrue($this->executeFilter([
+        $this->assertTrue($this->executeFilter(array(
             'publicProperty' => 'public',
             'privateProperty' => 'private',
             'dynamicProperty' => 'dynamic'
-        ]));
+        )));
     }
 
     /** @test */
     public function itRejectsObjectsIfThePropertiesDoNotReturnTheExpectedValues()
     {
-        $this->assertFalse($this->executeFilter([
+        $this->assertFalse($this->executeFilter(array(
             'publicProperty' => 'public',
             'privateProperty' => 'protected'
-        ]));
+        )));
     }
 
     /** @test @expectedException \RunTimeException */
     public function itThrowsAnExceptionIfAPropertiesDoesNotExists()
     {
-        $this->executeFilter([
+        $this->executeFilter(array(
             'publicProperty' => 'public',
             'unknownProperty' => 'unknown'
-        ]);
+        ));
     }
 }

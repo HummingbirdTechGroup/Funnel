@@ -13,7 +13,9 @@ final class MethodFilter implements FilterInterface
 
     public function __construct()
     {
-        $this->methodsFilter = (new MethodsFilter())->getFilter();
+        $filter = new MethodsFilter();
+
+        $this->methodsFilter = $filter->getFilter();
     }
 
     /**
@@ -24,7 +26,7 @@ final class MethodFilter implements FilterInterface
         $callable = $this->methodsFilter;
 
         return function ($method, $value) use ($callable) {
-            return $callable([$method => $value]);
+            return $callable(array($method => $value));
         };
     }
 

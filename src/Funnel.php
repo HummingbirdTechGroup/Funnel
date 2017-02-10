@@ -9,7 +9,7 @@ final class Funnel implements Repository
     /**
      * @var \Closure[]
      */
-    private static $filters = [];
+    private static $filters = array();
 
     /**
      * @var Repository
@@ -77,7 +77,7 @@ final class Funnel implements Repository
      *
      * @return object[]
      */
-    public function findBy(callable $callback)
+    public function findBy($callback)
     {
         return array_values(array_filter($this->repository->getAll(), $callback));
     }
@@ -87,7 +87,7 @@ final class Funnel implements Repository
      *
      * @return int
      */
-    public function countBy(callable $callback)
+    public function countBy($callback)
     {
         return count($this->findBy($callback));
     }
@@ -97,9 +97,11 @@ final class Funnel implements Repository
      *
      * @return object|null
      */
-    public function findOneBy(callable $callback)
+    public function findOneBy($callback)
     {
-        return @$this->findBy($callback)[0];
+        $items = $this->findBy($callback);
+
+        return @$items[0];
     }
 
     /**
@@ -120,7 +122,7 @@ final class Funnel implements Repository
         $callable = call_user_func_array(self::$filters[$filter], $arguments);
         $callable = ($matches[2] !== '' ? self::negate($callable) : $callable);
 
-        return call_user_func([$this, $matches[1]], $callable);
+        return call_user_func(array($this, $matches[1]), $callable);
     }
 
     /**
@@ -140,7 +142,7 @@ final class Funnel implements Repository
      *
      * @return \Closure
      */
-    private static function negate(callable $callback)
+    private static function negate($callback)
     {
         return function ($object) use ($callback) {
             return !$callback($object);
@@ -155,7 +157,7 @@ final class Funnel implements Repository
      */
     private static function getMatches($regex, $subject)
     {
-        $matches = [];
+        $matches = array();
         if (preg_match($regex, $subject, $matches) !== 1) {
             return false;
         }
