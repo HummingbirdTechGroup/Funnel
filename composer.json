@@ -28,7 +28,8 @@
     },
     "require": {
         "php": "~5.5 || ~7.0",
-        "everzet/persisted-objects": "^1.0"
+        "everzet/persisted-objects": "^1.0",
+        "carlosv2/communism": "^1.2.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8"
