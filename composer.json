@@ -35,7 +35,7 @@
     "require": {
         "php": "~5.3 || ~7.0",
         "everzet/persisted-objects": "^1.0",
-        "carlosv2/communism": "dev-master@dev"
+        "carlosv2/communism": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8"
